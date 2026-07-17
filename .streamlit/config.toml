@@ -1,0 +1,12 @@
+[theme]
+# This single line fixes the white-on-white text bug globally
+base = "light"
+
+primaryColor = "#1565C0"
+backgroundColor = "#F8FAFC"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#0F172A"
+font = "sans serif"
+
+[server]
+runOnSave = true

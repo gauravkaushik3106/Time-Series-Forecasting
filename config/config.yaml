@@ -1,0 +1,91 @@
+# =============================================================================
+# Hybrid Stochastic Hydrology & Deep Learning Framework — Lucknow Rainfall
+# Master Configuration File
+# =============================================================================
+
+project:
+  name: "Lucknow Rainfall Forecasting Framework"
+  location: "Lucknow, Uttar Pradesh, India"
+  version: "1.0.0"
+  random_seed: 42
+
+paths:
+  data_raw:       "data/raw/Lucknow_rainfall_cleaned.xls"
+  data_processed: "data/processed/lucknow_processed.parquet"
+  data_features:  "data/features/lucknow_features.parquet"
+  figures_eda:    "outputs/figures/eda"
+  figures_prep:   "outputs/figures/preprocessing"
+  reports:        "outputs/reports"
+  models:         "outputs/models"
+  predictions:    "outputs/predictions"
+
+schema:
+  date_column: "DATE"
+  target_column: "RAINFALL"
+  feature_columns:
+    - "TMAX"
+    - "TMIN"
+    - "TAVG"
+    - "RH"
+    - "WIND"
+    - "PRESSURE"
+    - "CLOUD"
+    - "SOLAR_RAD"
+    - "SOIL_WET_SURF"
+    - "SOIL_WET_ROOT"
+  expected_start: "2000-01-01"
+  expected_end:   "2025-12-31"
+  expected_rows:  9497
+  bounds:
+    RAINFALL:      [0.0,   500.0]
+    TMAX:          [10.0,   55.0]
+    TMIN:          [-5.0,   40.0]
+    TAVG:          [ 0.0,   50.0]
+    RH:            [ 0.0,  100.0]
+    WIND:          [ 0.0,   50.0]
+    PRESSURE:      [95.0,  105.0]
+    CLOUD:         [ 0.0,  100.0]
+    SOLAR_RAD:     [ 0.0,   40.0]
+    SOIL_WET_SURF: [ 0.0,    1.0]
+    SOIL_WET_ROOT: [ 0.0,    1.0]
+
+split:
+  train_frac: 0.70
+  val_frac:   0.15
+  test_frac:  0.15
+
+rainfall:
+  trace_threshold:      0.1
+  light_threshold:      2.5
+  moderate_threshold:   15.6
+  heavy_threshold:      64.5
+  very_heavy_threshold: 115.6
+  extreme_threshold:    204.4
+  dry_day_threshold:    0.1
+
+monsoon_months:     [6, 7, 8, 9]
+premonsoon_months:  [3, 4, 5]
+postmonsoon_months: [10, 11]
+winter_months:      [12, 1, 2]
+
+eda:
+  rolling_window_short:   7
+  rolling_window_medium: 30
+  rolling_window_long:   90
+  acf_lags:              60
+  dry_spell_min_length:   3
+  stl_period:           365
+  vif_threshold:         10.0
+
+plotting:
+  dpi:             150
+  figsize_wide:    [14, 6]
+  figsize_tall:    [10, 12]
+  figsize_square:  [10, 9]
+  figsize_large:   [16, 10]
+  style:           "seaborn-v0_8-whitegrid"
+  palette_main:    "#2E86AB"
+  palette_accent:  "#E84855"
+  palette_monsoon: "#3BB273"
+  palette_dry:     "#F4A261"
+  palette_neutral: "#6C757D"

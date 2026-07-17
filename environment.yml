@@ -1,0 +1,55 @@
+# =============================================================================
+# Lucknow Rainfall Forecasting Framework — Conda Environment
+# =============================================================================
+# Create environment:
+#   conda env create -f environment.yml
+#
+# Activate:
+#   conda activate lucknow-rainfall
+#
+# Update existing environment:
+#   conda env update -f environment.yml --prune
+# =============================================================================
+
+name: lucknow-rainfall
+
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+
+dependencies:
+  # ── Python runtime ──────────────────────────────────────────────────────────
+  - python=3.12
+
+  # ── Core data science (conda-forge builds preferred for C extension compat) ─
+  - pandas=3.0.2
+  - numpy=2.4.4
+  - scipy=1.17.1
+  - pyarrow=24.0.0
+
+  # ── Visualisation ──────────────────────────────────────────────────────────
+  - matplotlib=3.10.8
+  - seaborn=0.13.2
+  - pillow=12.1.1
+
+  # ── Machine learning ───────────────────────────────────────────────────────
+  - scikit-learn=1.8.0
+
+  # ── Statistics ─────────────────────────────────────────────────────────────
+  - statsmodels=0.14.6
+  - pyyaml=6.0.3
+
+  # ── Utilities ──────────────────────────────────────────────────────────────
+  - pip
+
+  # ── pip-only packages (not on conda-forge at pinned versions) ──────────────
+  - pip:
+    - xgboost==3.2.0
+    - pmdarima==2.1.1
+    - shap==0.51.0
+    - plotly==6.7.0
+    - streamlit==1.57.0
+    # CPU-only torch — replace index-url for GPU builds
+    - torch==2.12.0
+    - joblib>=1.3.0
